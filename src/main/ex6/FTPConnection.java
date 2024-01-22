@@ -5,8 +5,10 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
 import java.io.*;
+import java.lang.management.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import java.util.logging.*;
 
 public class FTPConnection {
 
@@ -15,6 +17,21 @@ public class FTPConnection {
     private static final String USERNAME = "if0_35747537";
     private static final String PASSWORD = "pZ7B4c2SZwD7X";
     private static final String SERVER_FILES_DIRECTORY = "/htdocs/";
+    private static final Logger LOGGER = Logger.getLogger("MyLog.log");
+    private static FileHandler fh = null;
+
+    static {
+        try {
+            fh = new FileHandler("C:\\IdeaProjects\\2nDAM\\FTPConnections\\src\\main\\ex6\\MyLog.log", 256 * 256, 1, true);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+            LOGGER.addHandler(fh);
+        } catch (IOException | SecurityException e) {
+            System.out.println("ERROR | " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) {
 
@@ -22,18 +39,31 @@ public class FTPConnection {
 
         try {
             if (connectToServer(ftpClient, SERVER, PORT)) {
-                System.out.println("Connection made correctly");
+                logElement("Connection made correctly", Level.FINE);
             }
 
             if (loginToServer(ftpClient, USERNAME, PASSWORD)) {
-                System.out.println("LOGIN successful");
+                logElement("Login made correctly", Level.FINE);
 
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+                logElement("ENTERED BINARY TRANSFER MODE", Level.FINE);
             }
 
             ftpClient.enterLocalPassiveMode();
+            logElement("ENTERED LOCAL PASSIVE MODE", Level.INFO);
             System.out.println("\n    prova2.txt TEXT \n ----------------------------------------");
-//            readFileData(ftpClient, "/htdocs/prova.txt");
+
+            logElement("BEGGINING MEMEORY THREADS LOG ------------------------------------------", Level.INFO);
+            logMemoryAndThreads();
+
+//            logElement("Beggining ex9 log test", Level.INFO);
+//            readFileData(ftpClient, "/htdocs/notValidFile.txt");
+//
+//            logElement("Beggining ex10 log test", Level.INFO);
+//            FileInputStream fis = new FileInputStream("C:\\IdeaProjects\\2nDAM\\FTPConnections\\src\\main\\ex6\\data.txt");
+//            ftpClient.changeWorkingDirectory(SERVER_FILES_DIRECTORY);
+//            uploadFileToServer(ftpClient, fis, "isma_test1.txt");
+
 //            ftpClient.retrieveFile()
 //            System.out.println("\n            FILES FROM SERVER \n --------------------------------------");
 //            listAllFromServer(ftpClient);
@@ -41,14 +71,91 @@ public class FTPConnection {
             System.out.println("------------------------------------------------- \n");
 
         } catch (Exception e) {
-            System.out.println("ERROR. | " + e.getMessage());
+            logElement(e.getMessage(), Level.SEVERE);
             e.printStackTrace();
         } finally {
             if (logoutOfServer(ftpClient)) {
-                System.out.println("CLIENT LOGGED OUT");
+                logElement("CLIENT LOGGED OUT successfully", Level.INFO);
             }
 
             disconnectFromServer(ftpClient);
+        }
+    }
+
+    public static void logMemoryAndThreads() {
+        // Log memory usage
+        MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
+        MemoryUsage heapMemoryUsage = memoryMXBean.getHeapMemoryUsage();
+        MemoryUsage nonHeapMemoryUsage = memoryMXBean.getNonHeapMemoryUsage();
+
+        logElement("Heap Memory Usage: " + heapMemoryUsage.toString(), Level.INFO);
+        logElement("Non-Heap Memory Usage: " + nonHeapMemoryUsage.toString(), Level.INFO);
+
+        // Log thread information
+        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+        ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(true, true);
+
+        logElement("Thread Count: " + threadMXBean.getThreadCount(), Level.INFO);
+
+        for (ThreadInfo threadInfo : threadInfos) {
+            logElement("Thread ID: " + threadInfo.getThreadId() +
+                    " | Thread Name: " + threadInfo.getThreadName() +
+                    " | Thread State: " + threadInfo.getThreadState(), Level.INFO);
+        }
+    }
+
+    public static void logElement(String element, Level type) {
+        try {
+            if (type == Level.INFO)
+                LOGGER.info(element);
+            else if (type == Level.SEVERE)
+                LOGGER.severe(element);
+            else if (type == Level.WARNING)
+                LOGGER.warning(element);
+            else if (type == Level.CONFIG)
+                LOGGER.config(element);
+            else if (type == Level.FINE)
+                LOGGER.fine(element);
+            else if (type == Level.FINER)
+                LOGGER.finer(element);
+            else if (type == Level.FINEST)
+                LOGGER.finest(element);
+
+        } catch (Exception e) {
+            System.out.println("ERROR | " + e.getMessage());
+            LOGGER.severe(e.getMessage());
+        }
+    }
+
+    public static void readFileData(FTPClient client, String path) {
+        try {
+            InputStream inputStream = client.retrieveFileStream(path);
+            Scanner scanner = new Scanner(inputStream);
+            StringBuffer sb = new StringBuffer();
+
+            while (scanner.hasNext()) {
+                sb.append(scanner.nextLine());
+                sb.append("\n");
+            }
+
+            System.out.println(sb.toString());
+        } catch (Exception e) {
+            logElement(e.getMessage(), Level.SEVERE);
+            e.printStackTrace();
+        }
+    }
+
+    public static void uploadFileToServer(FTPClient client, InputStream data, String remoteFileName) {
+        try {
+            boolean done = client.storeFile(remoteFileName, data);
+
+            if (done) {
+                System.out.println("File Uploaded!!");
+            }
+
+        } catch (Exception e) {
+            logElement(e.getMessage(), Level.SEVERE);
+            e.printStackTrace();
         }
     }
 
@@ -70,7 +177,7 @@ public class FTPConnection {
             try {
                 if (client.isConnected()) {
                     client.disconnect();
-                    System.out.println("CLIENT DISCONNECTED");
+                    logElement("CLIENT DISCONNECTED CORRECTLY", Level.INFO);
                 }
             } catch (Exception e) {
                 handleGeneralErrors(e);
@@ -87,7 +194,7 @@ public class FTPConnection {
                     return handleGeneralErrors(e);
                 }
             }
-            System.out.println("result: " + (2 == 0) );
+            System.out.println("result: " + (2 == 0));
         }
         return false;
     }
@@ -112,7 +219,7 @@ public class FTPConnection {
                 try {
                     FTPFile[] serverFiles = client.listFiles();
 
-                    for (FTPFile file: serverFiles) {
+                    for (FTPFile file : serverFiles) {
                         String details = file.getName();
                         if (file.isDirectory()) {
                             details = "[" + details + "]";
@@ -121,7 +228,7 @@ public class FTPConnection {
                     }
 
                 } catch (Exception e) {
-                    System.out.println("ERROR  |  " + e.getMessage());
+                    logElement(e.getMessage(), Level.SEVERE);
                     e.printStackTrace();
                 }
             }
@@ -134,7 +241,7 @@ public class FTPConnection {
                 try {
                     FTPFile[] serverFiles = client.listFiles(path);
 
-                    for (FTPFile file: serverFiles) {
+                    for (FTPFile file : serverFiles) {
                         String details = file.getName();
                         if (file.isDirectory()) {
                             details = "[" + details + "]";
@@ -143,33 +250,15 @@ public class FTPConnection {
                     }
 
                 } catch (Exception e) {
-                    System.out.println("ERROR  |  " + e.getMessage());
+                    logElement(e.getMessage(), Level.SEVERE);
                     e.printStackTrace();
                 }
             }
         }
     }
 
-    public static void readFileData(FTPClient client, String path) {
-        try {
-            InputStream inputStream = client.retrieveFileStream(path);
-            Scanner scanner = new Scanner(inputStream);
-            StringBuffer sb = new StringBuffer();
-
-            while (scanner.hasNext()) {
-                sb.append(scanner.nextLine());
-                sb.append("\n");
-            }
-
-            System.out.println(sb.toString());
-        } catch (Exception e) {
-            System.out.println("ERROR | " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     public static boolean handleGeneralErrors(Exception e) {
-        System.out.println("ERROR | " + e.getMessage());
+        logElement(e.getMessage(), Level.SEVERE);
         e.printStackTrace();
         return false;
     }

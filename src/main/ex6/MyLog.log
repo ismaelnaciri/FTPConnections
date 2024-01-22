@@ -1,0 +1,76 @@
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: Connection made correctly
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: Login made correctly
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: ENTERED BINARY TRANSFER MODE
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: ENTERED LOCAL PASSIVE MODE
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: Beggining ex9 log test
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+SEVERE: null
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: Beggining ex10 log test
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+SEVERE: C:\IdeaProjects\2nDAM\FTPConnections\src\main\ex6\jose.txt (El sistema no puede encontrar el archivo especificado)
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT LOGGED OUT successfully
+ene 22, 2024 11:45:01 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT DISCONNECTED CORRECTLY
+ene 22, 2024 11:48:21 A. M. main.ex6.FTPConnection logElement
+INFO: ENTERED LOCAL PASSIVE MODE
+ene 22, 2024 11:48:21 A. M. main.ex6.FTPConnection logElement
+INFO: Beggining ex9 log test
+ene 22, 2024 11:48:21 A. M. main.ex6.FTPConnection logElement
+SEVERE: null
+ene 22, 2024 11:48:21 A. M. main.ex6.FTPConnection logElement
+INFO: Beggining ex10 log test
+ene 22, 2024 11:48:21 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT LOGGED OUT successfully
+ene 22, 2024 11:48:21 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT DISCONNECTED CORRECTLY
+ene 22, 2024 11:49:09 A. M. main.ex6.FTPConnection logElement
+INFO: ENTERED LOCAL PASSIVE MODE
+ene 22, 2024 11:49:09 A. M. main.ex6.FTPConnection logElement
+INFO: Beggining ex9 log test
+ene 22, 2024 11:49:09 A. M. main.ex6.FTPConnection logElement
+SEVERE: null
+ene 22, 2024 11:49:09 A. M. main.ex6.FTPConnection logElement
+INFO: Beggining ex10 log test
+ene 22, 2024 11:49:09 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT LOGGED OUT successfully
+ene 22, 2024 11:49:09 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT DISCONNECTED CORRECTLY
+ene 22, 2024 11:54:44 A. M. main.ex6.FTPConnection logElement
+INFO: ENTERED LOCAL PASSIVE MODE
+ene 22, 2024 11:54:44 A. M. main.ex6.FTPConnection logElement
+
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: BEGGINING MEMEORY THREADS LOG ------------------------------------------
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Heap Memory Usage: init = 264241152(258048K) used = 4194304(4096K) committed = 264241152(258048K) max = 4196401152(4098048K)
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Non-Heap Memory Usage: init = 7667712(7488K) used = 6095928(5953K) committed = 10551296(10304K) max = -1(-1K)
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread Count: 8
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 1 | Thread Name: main | Thread State: RUNNABLE
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 2 | Thread Name: Reference Handler | Thread State: RUNNABLE
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 3 | Thread Name: Finalizer | Thread State: WAITING
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 4 | Thread Name: Signal Dispatcher | Thread State: RUNNABLE
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 5 | Thread Name: Attach Listener | Thread State: RUNNABLE
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 21 | Thread Name: Common-Cleaner | Thread State: TIMED_WAITING
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 22 | Thread Name: Monitor Ctrl-Break | Thread State: RUNNABLE
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: Thread ID: 23 | Thread Name: Notification Thread | Thread State: RUNNABLE
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT LOGGED OUT successfully
+ene 22, 2024 11:56:10 A. M. main.ex6.FTPConnection logElement
+INFO: CLIENT DISCONNECTED CORRECTLY
